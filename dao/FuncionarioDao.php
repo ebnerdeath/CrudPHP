@@ -1,7 +1,7 @@
 <?php
 
 require_once '../dao/Icrud.php';
-require_once '../util/Connection.php';
+require '../util/Connection.php';
 
 class FuncionarioDao implements Icrud{
     private $instanciaConexaoAtiva;
@@ -12,23 +12,15 @@ class FuncionarioDao implements Icrud{
     }
 
     public function create( $objeto ) {
-        //$id = $this->getNewIdContato();
         $nome = $objeto->getNome();
-        echo $nome;
         $usuario = $objeto->getUsuario();
-        echo $usuario;
         $senha = $objeto->getSenha();
-        echo $senha;
         try {
-            //$conn = new PDO("mysql:host=localhost;dbname=crud", "root","");
-            // set the PDO error mode to exception
-            //$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
+            $conn = new PDO("mysql:host=localhost;dbname=crud", "root","");
+            //set the PDO error mode to exception
+            $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             
-
-            $this->instanciaConexaoAtiva = Connection::getInstancia();
-            echo $instanciaConexaoAtiva;
-            $stmt = $instanciaConexaoAtiva->prepare("INSERT INTO funcionarios (nome, usuario, senha) 
+            $stmt = $conn->prepare("INSERT INTO funcionarios (nome, usuario, senha) 
             VALUES (:nome, :usuario, :senha)");
             $stmt->bindParam(':nome', $nome);
             $stmt->bindParam(':usuario', $usuario);

@@ -56,7 +56,7 @@ require_once '../dao/FuncionarioDao.php';
             <input type="checkbox" value="remember-me"> Lembrar-me
           </label>
         </div>
-        <input name="acessar" class="btn btn-lg btn-danger btn-block" type="submit">Acessar</input>
+        <button name="acessar" class="btn btn-lg btn-danger btn-block" type="submit">Acessar</button>
       </form>
     </div>
   </div>
