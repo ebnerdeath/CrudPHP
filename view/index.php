@@ -31,15 +31,15 @@ require_once '../dao/FuncionarioDao.php';
           $funcionario = new Funcionario("0","0","0");
           $funcionariodao = new FuncionarioDao();
           if(isset($_POST['acessar'])):
-            $nome = $_POST['txtUsuario'];
+            //$nome = $_POST['txtUsuario'];
             $usuario = $_POST['txtUsuario'];
             $senha = $_POST['txtSenha'];
 
-            $funcionario->setNome($nome);
-            $funcionario->setUsuario($usuario);
-            $funcionario->setSenha($senha);
+            //$funcionario->setNome($nome);
+            //$funcionario->setUsuario($usuario);
+            //$funcionario->setSenha($senha);
 
-            $funcionariodao->create($funcionario);
+            $funcionariodao->validaLogin($usuario,$senha);
           endif;  
        ?>
       <form method="POST">

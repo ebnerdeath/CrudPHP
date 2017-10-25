@@ -112,6 +112,39 @@ class FuncionarioDao implements Icrud{
            echo $excecao->getMessage();
         }
     }
+
+
+    public function validaLogin( $usuario, $senha ) {
+        try {
+            //$conn = new PDO("mysql:host=localhost;dbname=crud", "root","");
+            //set the PDO error mode to exception
+            //$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            $conn = conecta();
+            $stmt = $conn->prepare("SELECT usuario,senha FROM funcionarios WHERE usuario = :usuario AND senha = :senha");
+            $stmt->bindParam(':usuario', $usuario);
+            $stmt->bindParam(':senha', $senha);
+           
+            if($stmt->execute()){
+                if($stmt->rowCount() > 0) {
+                    echo'true';
+                    return true;
+              } else {
+                    return false;
+              }
+            }else{
+                return false;
+            }
+        } catch( PDOException $excecao ){
+           echo $excecao->getMessage();
+        }
+     }
+
+
+
+
+
+
+
     
 }
 ?>
