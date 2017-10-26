@@ -1,6 +1,7 @@
 <?php
 require_once '../model/Funcionario.php';
 require_once '../dao/FuncionarioDao.php';
+require '../util/DestroiSessao.php';
 ?>
 
 <!DOCTYPE html>
@@ -31,15 +32,15 @@ require_once '../dao/FuncionarioDao.php';
           $funcionario = new Funcionario("0","0","0");
           $funcionariodao = new FuncionarioDao();
           if(isset($_POST['acessar'])):
-            //$nome = $_POST['txtUsuario'];
+
             $usuario = $_POST['txtUsuario'];
             $senha = $_POST['txtSenha'];
 
-            //$funcionario->setNome($nome);
-            //$funcionario->setUsuario($usuario);
-            //$funcionario->setSenha($senha);
-
-            $funcionariodao->validaLogin($usuario,$senha);
+            if($funcionariodao->validaLogin($usuario,$senha)){
+              session_start();
+              $_SESSION["validacao"] = "true";
+              header("Location: MenuPrincipal.php");
+            }
           endif;  
        ?>
       <form method="POST">

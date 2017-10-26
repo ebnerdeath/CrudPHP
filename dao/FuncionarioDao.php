@@ -32,7 +32,25 @@ class FuncionarioDao implements Icrud{
         }
      }
 
-     public function read( $id ) {
+     public function read() {
+        try {
+           $conn = conecta(); 
+           $operacao = $conn->prepare("SELECT * FROM {$this->tabela};");
+           $operacao->execute();
+           while($getRow = $operacao->fetch(PDO::FETCH_OBJ)){
+                $nome = $getRow->nome;
+                $usuario = $getRow->usuario;
+                $senha = $getRow->senha;
+                $objeto = new Funcionario( $nome, $usuario, $senha );
+                $lista[] = $objeto;
+           }
+           return $lista;
+        } catch( PDOException $excecao ){
+           echo $excecao->getMessage();
+        }
+     }
+
+     public function readFromId( $id ) {
         try {
            $operacao = $this->instanciaConexaoAtiva->prepare("SELECT * from {$this->tabela} WHERE ID=?");
            $operacao->bind_Param(“id”,$id);
