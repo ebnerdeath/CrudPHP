@@ -29,7 +29,7 @@ require '../util/DestroiSessao.php';
     <h1>Seja bem-vindo ao JEBLanches</h1>
     <div class="col-md-4 col-md-offset-2 col-md-offset-">
        <?php
-          $funcionario = new Funcionario("0","0","0");
+          $funcionario = new Funcionario(0,"0","0","0");
           $funcionariodao = new FuncionarioDao();
           if(isset($_POST['acessar'])):
 
@@ -44,7 +44,7 @@ require '../util/DestroiSessao.php';
           endif;  
        ?>
       <form method="POST">
-        <div class="form-group">
+        <div class="form-group" action="">
           <label for="txtUsuario" class="form-control-label">Usuário</label>
           <input type="text" id="txtUsuario" name="txtUsuario" class="form-control" placeholder="Informe o seu usuário..." required autofocus>
         </div>

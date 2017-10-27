@@ -1,11 +1,10 @@
 body {
-    background: url(../img/suco4k.jpg) no-repeat center center fixed;
+    background: url(../img/cleanBackground-1600-1200.jpg) no-repeat center center fixed;
     background-position: center;
     background-size: cover;
 }
 
 
-/*#menu-toggle{
+#menu-toggle{
 	color: white;
 }
-*/

@@ -34,17 +34,21 @@ class FuncionarioDao implements Icrud{
 
      public function read() {
         try {
-           $conn = conecta(); 
-           $operacao = $conn->prepare("SELECT * FROM {$this->tabela};");
-           $operacao->execute();
-           while($getRow = $operacao->fetch(PDO::FETCH_OBJ)){
-                $nome = $getRow->nome;
-                $usuario = $getRow->usuario;
-                $senha = $getRow->senha;
-                $objeto = new Funcionario( $nome, $usuario, $senha );
-                $lista[] = $objeto;
-           }
-           return $lista;
+            $conn = conecta(); 
+            $operacao = $conn->prepare("SELECT * FROM {$this->tabela};");
+            if($operacao->execute()){
+                if($operacao->rowCount() > 0){
+                    while($getRow = $operacao->fetch(PDO::FETCH_OBJ)){
+                            $id = $getRow->id;
+                            $nome = $getRow->nome;
+                            $usuario = $getRow->usuario;
+                            $senha = $getRow->senha;
+                            $objeto = new Funcionario( $id, $nome, $usuario, $senha );
+                            $lista[] = $objeto;
+                    }
+                    return $lista;
+                }    
+            }
         } catch( PDOException $excecao ){
            echo $excecao->getMessage();
         }
@@ -52,15 +56,18 @@ class FuncionarioDao implements Icrud{
 
      public function readFromId( $id ) {
         try {
-           $operacao = $this->instanciaConexaoAtiva->prepare("SELECT * from {$this->tabela} WHERE ID=?");
-           $operacao->bind_Param(“id”,$id);
+           $conn = conecta(); 
+           $operacao = $conn->prepare("SELECT * from {$this->tabela} WHERE ID= :id");
+           $operacao->bindParam(':id',$id);
            $operacao->execute();
            $getRow = $operacao->fetch(PDO::FETCH_OBJ);
+           $idBanco = $getRow->id;
            $nome = $getRow->nome;
            $usuario = $getRow->usuario;
            $senha = $getRow->senha;
-           $objeto = new Contato( $nome, $usuario, $senha );
+           $objeto = new Funcionario($idBanco, $nome, $usuario, $senha );
            $objeto->setId($id);
+           echo $objeto->getNome();
            return $objeto;
         } catch( PDOException $excecao ){
            echo $excecao->getMessage();
@@ -94,8 +101,9 @@ class FuncionarioDao implements Icrud{
 
      public function delete( $id ) {
        try {
-          $operacao = $this->instanciaConexaoAtiva->prepare("DELETE FROM {$this->tabela} WHERE id=?");
-          $operacao->bind_Param(“id”,$id);
+          $conn = conecta(); 
+          $operacao = $conn->prepare("DELETE FROM {$this->tabela} WHERE id= :id;");
+          $operacao->bindParam(":id",$id);
           if($operacao->execute()){
              if($operacao->rowCount() > 0) {
                    return true;

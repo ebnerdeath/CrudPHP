@@ -6,7 +6,8 @@ class Funcionario{
     private $senha;
 
 
-    public function __construct($nome,$usuario,$senha){
+    public function __construct($id, $nome,$usuario,$senha){
+        $this->id = $id;
         $this->nome = $nome;
         $this->usuario = $usuario;
         $this->senha = $senha;
