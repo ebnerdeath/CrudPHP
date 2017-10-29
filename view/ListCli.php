@@ -1,7 +1,7 @@
 <?php
 require '../util/ValidaSessao.php';
-require '../dao/FuncionarioDao.php';
-require '../model/Funcionario.php';
+require '../dao/ClienteDao.php';
+require '../model/Cliente.php';
 include 'MenuPrincipal.php';
 ?>
 
@@ -13,7 +13,7 @@ include 'MenuPrincipal.php';
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>JEBLanches - Lista de Funcionarios</title>
+    <title>JEBLanches - Lista de Clientes</title>
 		<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
     <!-- Custom styles for this template -->
     <!--  <link href="assets/css/simple-sidebar.css" rel="stylesheet">
@@ -23,11 +23,11 @@ include 'MenuPrincipal.php';
 </head>
 
 <div class="container">
-	<h4>Lista de Funcionários</h4>
+	<h4>Lista de Clientes</h4>
 	<p>
 	<div class="row">
 				<div class="row">
-					<a href="cadFunc.php" class="btn btn-success btn-sm offset-3" role="button">Novo Funcionário</a>
+					<a href="cadFunc.php" class="btn btn-success btn-sm offset-3" role="button">Novo CLiente</a>
 					<p>
 				</div>
         <div class="col-md-12">
@@ -36,25 +36,25 @@ include 'MenuPrincipal.php';
               <thead>
 								<th>ID</th>
                 <th>Nome</th>
-                <th>Usuario</th>
-                <th>Senha</th>
+                <th>Cpf</th>
+                <th>Nascimento</th>
 								<th>Visualizar</th>
 								<th>Editar</th>
                 <th>Excluir</th>
               </thead>
 							<tbody>
 							<?php
-							$funcionariodao = new FuncionarioDao();
+							$clientedao = new ClienteDao();
 							// Inicia sessões
-							if($funcionariodao->read()!=null){
-								$arr = $funcionariodao->read();
-								foreach($arr as $key => $funcionario){
-									$arrObj[] = $funcionario;
+							if($clientedao->read()!=null){
+								$arr = $clientedao->read();
+								foreach($arr as $key => $cliente){
+									$arrObj[] = $cliente;
 										echo'<tr>';
-										echo'<td data-id="'.$funcionario->getId().'">'.$funcionario->getId().'</td>';
-										echo'<td data-nome="'.$funcionario->getNome().'">'.$funcionario->getNome().'</td>';
-										echo'<td data-usuario="'.$funcionario->getUsuario().'">'.$funcionario->getUsuario().'</td>';
-										echo'<td data-senha="'.$funcionario->getSenha().'">'.$funcionario->getSenha().'</td>';
+										echo'<td data-id="'.$cliente->getId().'">'.$cliente->getId().'</td>';
+										echo'<td data-nome="'.$cliente->getNome().'">'.$cliente->getNome().'</td>';
+										echo'<td data-usuario="'.$cliente->getCpf().'">'.$cliente->getCpf().'</td>';
+										echo'<td data-senha="'.$funcionario->getDataNasc().'">'.$funcionario->getDataNasc().'</td>';
 										
 										echo'<td><p data-placement="top" data-toggle="tooltip" title="Visualizar"><button id="btnVisualizar" class="btn btn-success btn-xs" data-title="Visualizar" data-toggle="modal" data-target="#modalVisualizar"><span class="fa fa-eye"></span></button></p></td>';
 										
@@ -75,7 +75,7 @@ include 'MenuPrincipal.php';
 					<!-- Cabecalho do modal -->
 					<div class="modal-header">
 						<button type="button" class="close" data-dismiss="modal">&times;</button>
-						<h4 class="modal-title">Alterar Funcionário</h4>
+						<h4 class="modal-title">Alterar Cliente</h4>
 					</div>
 					<!-- Corpo do modal -->
 					<div class="modal-body">
@@ -90,11 +90,11 @@ include 'MenuPrincipal.php';
 								<input type="text" class="form-control" name="nomeAlterar" id="nomeAlterar">
 							</div>
 							<div class="form-group">
-								<label for="usuarioAlterar">Usuario</label>
-								<input type="text" class="form-control" name="usuarioAlterar" id="usuarioAlterar">
+								<label for="cpfAlterar">Cpf</label>
+								<input type="text" class="form-control" name="cpfAlterar" id="cpfAlterar">
 							</div>
 							<div class="form-group">
-								<label for="senhaAlterar">Senha</label>
+								<label for="rgAlterar">Rg</label>
 								<input type="text" class="form-control" name="senhaAlterar" id="senhaAlterar">
 							</div>
 						</form>

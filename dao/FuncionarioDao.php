@@ -16,10 +16,7 @@ class FuncionarioDao implements Icrud{
         $usuario = $objeto->getUsuario();
         $senha = $objeto->getSenha();
         try {
-            $conn = new PDO("mysql:host=localhost;dbname=crud", "root","");
-            //set the PDO error mode to exception
-            $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-            
+            $conn = conecta(); 
             $stmt = $conn->prepare("INSERT INTO funcionarios (nome, usuario, senha) 
             VALUES (:nome, :usuario, :senha)");
             $stmt->bindParam(':nome', $nome);
@@ -80,11 +77,12 @@ class FuncionarioDao implements Icrud{
         $usuario = $objeto->getUsuario();
         $senha = $objeto->getSenha();
         try {
-           $operacao = $this->instanciaConexaoAtiva->prepare("UPDATE {$this->tabela} SET nome=?, usuario=?, senha=? WHERE id=?");
-           $operacao->bind_Param(“id”, $id);
-           $operacao->bind_Param(“nome”, $nome);
-           $operacao->bind_Param(“usuario, $email);
-           $operacao->bind_Param(“senha, $telefone);
+           $conn = conecta(); 
+           $operacao = $conn->prepare("UPDATE {$this->tabela} SET nome= :nome, usuario= :usuario, senha= :senha WHERE id= :id");
+           $operacao->bindParam(":id", $id);
+           $operacao->bindParam(":nome", $nome);
+           $operacao->bindParam(":usuario", $usuario);
+           $operacao->bindParam(":senha", $senha);
            if($operacao->execute()){
               if($operacao->rowCount() > 0){
                  return true;
@@ -102,7 +100,7 @@ class FuncionarioDao implements Icrud{
      public function delete( $id ) {
        try {
           $conn = conecta(); 
-          $operacao = $conn->prepare("DELETE FROM {$this->tabela} WHERE id= :id;");
+          $operacao = $conn->prepare("DELETE FROM {$this->tabela} WHERE id= :id");
           $operacao->bindParam(":id",$id);
           if($operacao->execute()){
              if($operacao->rowCount() > 0) {
@@ -142,9 +140,6 @@ class FuncionarioDao implements Icrud{
 
     public function validaLogin( $usuario, $senha ) {
         try {
-            //$conn = new PDO("mysql:host=localhost;dbname=crud", "root","");
-            //set the PDO error mode to exception
-            //$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             $conn = conecta();
             $stmt = $conn->prepare("SELECT usuario,senha FROM funcionarios WHERE usuario = :usuario AND senha = :senha");
             $stmt->bindParam(':usuario', $usuario);
@@ -164,13 +159,5 @@ class FuncionarioDao implements Icrud{
            echo $excecao->getMessage();
         }
      }
-
-
-
-
-
-
-
-    
 }
 ?>

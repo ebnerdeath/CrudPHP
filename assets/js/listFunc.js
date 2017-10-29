@@ -35,96 +35,11 @@ var sidebar = false;
 		window.location.href = link;
 	}
 	
-	function alteraPostCliente(){
-		let codigo = $('#codigoUpdate').val();
-		let nome = $('#nomeUpdate').val();
-		let cpf = $('#cpfUpdate').val();
-		let rg = $('#rgUpdate').val();
-		let datanasc = $('#dataNascUpdate').val();
-		let tipo = $('#btnTipoUpdate').text();
-		let sexo = $('#btnSexoUpdate').text();
-		let cnpj = $('#cnpjUpdate').val();
-		let telfix = $('#telFixUpdate').val();
-		let telcel = $('#telCelUpdate').val();
-		let contato = $('#contatoUpdate').val();
-		let email = $('#emailUpdate').val();
-		let cep = $('#cepUpdate').val();
-		let endereco = $('#enderecoUpdate').val();
-		let numero = $('#numeroUpdate').val();
-		let uf = $('#btnUFUpdate').text();
-		let cidade = $('#cidadeUpdate').val();
-		let complemento = $('#complementoUpdate').val();
-		
-		$.post('http://localhost:8080/JEBLanches/AlteraClienteServlet', 
-			{ codigoUpdate: codigo,
-			  nomeUpdate : nome,
-			  cpfUpdate : cpf,
-			  rgUpdate : rg,
-			  dataNascUpdate : datanasc,
-			  btnTipoUpdate : tipo,
-			  btnSexoUpdate : sexo,
-			  cnpjUpdate : cnpj,
-			  telfixUpdate : telfix,
-			  telcelUpdate: telcel,
-			  contatoUpdate : contato,
-			  emailUpdate : email,
-			  cep : cepUpdate,
-			  endereco: enderecoUpdate,
-			  numero : numeroUpdate,
-			  uf : btnUFUpdate,
-			  cidade : cidadeUpdate,
-			  complemento : complementoUpdate
-			  },
-				function(retorno){
-				$('#modalAlterar').modal('hide');
-				alert('Dados alterados com sucesso!');
-				location.reload();
-			}).fail(function(){
-				alert('Erro ao salvar, estamos trabalhando para resolver seu problema!');
-				location.reload();
-		});
-		
-	}
-	
-	function deletaPostCliente(){
-		let codigo = $('#codigoDelete').val();
-		let nome = $('#nomeDelete').val();
-		let cpf = $('#cpfDelete').val();
-		
-		$.post('http://localhost:8080/JEBLanches/DeletaClienteServlet', 
-			{ codigoDelete: codigo,
-			  nomeDelete : nome,
-			  cpfDelete : cpf },
-				function(retorno){
-				$('#modalDeletar').modal('hide');
-				alert('O cliente foi excluído com sucesso!');
-				location.reload();
-			}).fail(function(){
-				alert('Erro ao excluir, estamos trabalhando para resolver seu problema!');
-				location.reload();
-		});
-	}
-	
-	/*
-	 * Pesquisar por que nao carrega no navegador
-	 * 
-	 * function readRowTable(document){
-		var codigo = $(document).closest('tr').find('td[data-id]').data('id');
-        var nome = $(document).closest('tr').find('td[data-nome]').data('nome');
-        var cpf = $(document).closest('tr').find('td[data-cpf]').data('cpf');
-        
-        $('#codigoUpdate').val(codigo);
-        $('#nomeUpdate').val(nome);
-        $('#cpfUpdate').val(cpf);
-	}
-	*/
-	
-
 	//Recupera o valor da linha com jquery para o modal alterar
 $(function(){
 	$(document).on('click', '#btnAlterar', function(e) {
 		e.preventDefault;
-					var codigo = $(this).closest('tr').find('td[data-id]').data('id');
+			var codigo = $(this).closest('tr').find('td[data-id]').data('id');
 	        var nome = $(this).closest('tr').find('td[data-nome]').data('nome');
 	        var usuario = $(this).closest('tr').find('td[data-usuario]').data('usuario');
 	        var senha = $(this).closest('tr').find('td[data-senha]').data('senha');
@@ -132,7 +47,7 @@ $(function(){
 	        $('#codigoAlterar').val(codigo);
 	        $('#nomeAlterar').val(nome);
 	        $('#usuarioAlterar').val(usuario);
-					$('#senhaAlterar').val(senha);
+			$('#senhaAlterar').val(senha);
 		});
 });
 
@@ -148,7 +63,7 @@ $(function(){
 	        $('#codigoExcluir').val(codigo);
 	        $('#nomeExcluir').val(nome);
 	        $('#usuarioExcluir').val(usuario);
-					$('#senhaExcluir').val(senha);
+			$('#senhaExcluir').val(senha);
 		});
 });
 
@@ -164,6 +79,47 @@ $(function(){
 	        $('#codigoVisualizar').val(codigo);
 	        $('#nomeVisualizar').val(nome);
 	        $('#usuarioVisualizar').val(usuario);
-					$('#senhaVisualizar').val(senha);
+			$('#senhaVisualizar').val(senha);
 		});
+});
+
+
+$(document).ready(function(){
+	$("#confirmaExclusao").click(function(){
+		var a=$('#formExcluir').serialize();
+		$.ajax({
+			type:'POST',
+			url:'../util/ServicoFuncionario.php?servico=DELETE',
+			data:a,
+			beforeSend:function() {
+        //
+			},
+			complete:function() {
+        //	
+			},
+			success:function(result) {
+				location.reload();
+			}
+		});
+	});
+});
+
+$(document).ready(function(){
+	$("#confirmaAlteracao").click(function(){
+		var a=$('#formAlterar').serialize();
+		$.ajax({
+			type:'POST',
+			url:'../service/ServicoFuncionario.php?servico=UPDATE',
+			data:a,
+			beforeSend:function() {
+        //
+			},
+			complete:function() {
+        //	
+			},
+			success:function(result) {
+				location.reload();
+			}
+		});
+	});
 });
