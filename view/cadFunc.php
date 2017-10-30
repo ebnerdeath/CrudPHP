@@ -38,14 +38,13 @@ include 'MenuPrincipal.php';
                         </div>
                         <div class="form-group col-lg-6 col-md-6 col-sm-12 col-12">
                             <label for="senhaInserir">Senha</label>
-                            <input type="text" class="form-control" id="senhaInserir" name="senhaInserir" title="Informe a senha!">
+                            <input type="password" class="form-control" id="senhaInserir" name="senhaInserir" title="Informe a senha!">
                         </div>
 				    </div>
 					<a href="ListFunc.php" class="btn btn-info offset-lg-4 offset-lg-4 " role="button">Listar</a>
 					<button type="button" class="btn btn-secondary" role="button" onclick="location.reload()">Limpar Campos</button>
 					<button id="btnInserir" name="btnInserir" type="button" class="btn btn-success" role="button">Salvar</button>
 			</form>
-            <div id="resposta"></div>
 		</div>
     <!-- Bootstrap core JavaScript -->
     <script src="../assets/js/popper.js"></script>

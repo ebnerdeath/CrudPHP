@@ -42,12 +42,11 @@ $(function(){
 			var codigo = $(this).closest('tr').find('td[data-id]').data('id');
 	        var nome = $(this).closest('tr').find('td[data-nome]').data('nome');
 	        var usuario = $(this).closest('tr').find('td[data-usuario]').data('usuario');
-	        var senha = $(this).closest('tr').find('td[data-senha]').data('senha');
+	        //var senha = $(this).closest('tr').find('td[data-senha]').data('senha');
 
 	        $('#codigoAlterar').val(codigo);
 	        $('#nomeAlterar').val(nome);
 	        $('#usuarioAlterar').val(usuario);
-			$('#senhaAlterar').val(senha);
 		});
 });
 
@@ -55,15 +54,13 @@ $(function(){
 $(function(){
 	$(document).on('click', '#btnExcluir', function(e) {
 		e.preventDefault;
-					var codigo = $(this).closest('tr').find('td[data-id]').data('id');
+			var codigo = $(this).closest('tr').find('td[data-id]').data('id');
 	        var nome = $(this).closest('tr').find('td[data-nome]').data('nome');
 	        var usuario = $(this).closest('tr').find('td[data-usuario]').data('usuario');
-	        var senha = $(this).closest('tr').find('td[data-senha]').data('senha');
 
 	        $('#codigoExcluir').val(codigo);
 	        $('#nomeExcluir').val(nome);
 	        $('#usuarioExcluir').val(usuario);
-			$('#senhaExcluir').val(senha);
 		});
 });
 
@@ -71,15 +68,13 @@ $(function(){
 $(function(){
 	$(document).on('click', '#btnVisualizar', function(e) {
 		e.preventDefault;
-					var codigo = $(this).closest('tr').find('td[data-id]').data('id');
+			var codigo = $(this).closest('tr').find('td[data-id]').data('id');
 	        var nome = $(this).closest('tr').find('td[data-nome]').data('nome');
 	        var usuario = $(this).closest('tr').find('td[data-usuario]').data('usuario');
-	        var senha = $(this).closest('tr').find('td[data-senha]').data('senha');
 
 	        $('#codigoVisualizar').val(codigo);
 	        $('#nomeVisualizar').val(nome);
 	        $('#usuarioVisualizar').val(usuario);
-			$('#senhaVisualizar').val(senha);
 		});
 });
 

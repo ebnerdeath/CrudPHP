@@ -37,7 +37,6 @@ include 'MenuPrincipal.php';
 								<th>ID</th>
                 <th>Nome</th>
                 <th>Usuario</th>
-                <th>Senha</th>
 								<th>Visualizar</th>
 								<th>Editar</th>
                 <th>Excluir</th>
@@ -54,7 +53,7 @@ include 'MenuPrincipal.php';
 										echo'<td data-id="'.$funcionario->getId().'">'.$funcionario->getId().'</td>';
 										echo'<td data-nome="'.$funcionario->getNome().'">'.$funcionario->getNome().'</td>';
 										echo'<td data-usuario="'.$funcionario->getUsuario().'">'.$funcionario->getUsuario().'</td>';
-										echo'<td data-senha="'.$funcionario->getSenha().'">'.$funcionario->getSenha().'</td>';
+										//echo'<td data-senha="'.$funcionario->getSenha().'">'.$funcionario->getSenha().'</td>';
 										
 										echo'<td><p data-placement="top" data-toggle="tooltip" title="Visualizar"><button id="btnVisualizar" class="btn btn-success btn-xs" data-title="Visualizar" data-toggle="modal" data-target="#modalVisualizar"><span class="fa fa-eye"></span></button></p></td>';
 										
@@ -95,7 +94,7 @@ include 'MenuPrincipal.php';
 							</div>
 							<div class="form-group">
 								<label for="senhaAlterar">Senha</label>
-								<input type="text" class="form-control" name="senhaAlterar" id="senhaAlterar">
+								<input type="password" class="form-control" name="senhaAlterar" id="senhaAlterar">
 							</div>
 						</form>
 					</div>
@@ -120,17 +119,6 @@ include 'MenuPrincipal.php';
             </div>
             <!-- Corpo do modal -->
             <div class="modal-body">
-						<?php
-							/*$funcionario = new Funcionario(0,"0","0","0");
-							$funcionariodao = new FuncionarioDao();
-							if(isset($_POST['confirmaExclusao'])):
-
-								$id = $_POST['codigoExcluir'];
-								if($funcionariodao->delete($id)){
-									header("Location: ListFunc.php");
-								}								
-							endif;*/  
-						?>
               <!-- Formulario que vai cuidar de excluir os dados no back-end -->
               <form id="formExcluir">
                 <div class="form-group">
@@ -144,10 +132,6 @@ include 'MenuPrincipal.php';
                 <div class="form-group">
                   <label for="usuarioExcluir">Usuario</label>
                   <input type="text" class="form-control" name="usuarioExcluir" id="usuarioExcluir" readonly>
-                </div>
-								<div class="form-group">
-                  <label for="senhaExcluir">Senha</label>
-                  <input type="text" class="form-control" name="senhaExcluir" id="senhaExcluir" readonly>
                 </div>
 								<!-- Footer do modal -->
 								<div class="modal-footer">
@@ -185,10 +169,6 @@ include 'MenuPrincipal.php';
                 <div class="form-group">
                   <label for="usuarioVisualizar">Usuario</label>
                   <input type="text" class="form-control" name="usuarioVisualizar" id="usuarioVisualizar" readonly>
-                </div>
-								<div class="form-group">
-                  <label for="senhaVisualizar">Senha</label>
-                  <input type="text" class="form-control" name="senhaVisualizar" id="senhaVisualizar" readonly>
                 </div>
               </form>
             </div>

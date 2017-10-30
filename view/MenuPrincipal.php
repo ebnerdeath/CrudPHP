@@ -21,6 +21,7 @@
     <!-- Custom styles for this template -->
     <link href="../assets/css/simple-sidebar.css" rel="stylesheet">
     <link href="../assets/css/MenuPrincipal.css" rel="stylesheet">
+    <link href="../assets/css/alertify.css" rel="stylesheet">
     <link href="../assets/css/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.0/jquery-confirm.min.css">
 
@@ -71,6 +72,7 @@
     <!-- Bootstrap core JavaScript -->
     <script src="../assets/js/jquery-3.2.1.js"></script>
     <script src="../assets/js/tether.js"></script>
+    <script src="../assets/js/alertify.js"></script>
     <script src="../assets/js/popper.js"></script>
     <script src="../assets/js/bootstrap.min.js"></script>
 	<script src="../assets/js/MenuPrincipal.js"></script>
