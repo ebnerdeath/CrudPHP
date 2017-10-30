@@ -1,16 +1,4 @@
 var sidebar = false;
-	
-	//Funcao utilizada para quando abrir a pagina aparecer uma mensagem Conectado com sucesso!
-	//$( document ).ready(function() {
-		//$.alert({
-			//theme: 'dark',
-			//animation: 'zoom',
-		    //closeAnimation: 'scale',
-			//title: '',
-		    //content: 'Conectado com sucesso!',
-		//});
-	//	$('#alertSucesso').hide();
-	//});
 
 	// Menu Toggle Script
 	function menuToggle(){ 
@@ -84,7 +72,7 @@ $(document).ready(function(){
 		var a=$('#formExcluir').serialize();
 		$.ajax({
 			type:'POST',
-			url:'../util/ServicoFuncionario.php?servico=DELETE',
+			url:'../service/ServicoFuncionario.php?servico=DELETE',
 			data:a,
 			beforeSend:function() {
         //
@@ -116,5 +104,39 @@ $(document).ready(function(){
 				location.reload();
 			}
 		});
+	});
+});
+
+$(document).ready(function(){
+	$("#salvarInsercao").click(function(){
+		if($("#nomeInserir").val()==""){ 
+			alertify.error('O campo nome necessita ser preenchido!');
+		}else
+		if($("#usuarioInserir").val()==""){
+			alertify.error('O campo usuário necessita ser preenchido!');
+		}else
+		if($("#senhaInserir").val()==""){
+			alertify.error('O campo senha necessita ser preenchido!');
+		}else{
+			var a=$('#formInserir').serialize();
+			$.ajax({
+				type:'POST',
+				url:'../service/ServicoFuncionario.php?servico=INSERT',
+				data:a,
+				beforeSend:function() {
+			//
+				},
+				complete:function() {
+			//	
+				},
+				success:function(result) {
+					alertify.success('Cadastro realizado com sucesso!');
+					//$('#formInserir input').val("");
+					//$('.modal').modal('hide'); 
+					location.reload();
+
+				}
+			});
+		}
 	});
 });

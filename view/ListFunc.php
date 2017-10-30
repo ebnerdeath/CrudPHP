@@ -25,14 +25,14 @@ include 'MenuPrincipal.php';
 <div class="container">
 	<h4>Lista de Funcionários</h4>
 	<p>
-	<div class="row">
+	<div data-role="content">
 				<div class="row">
-					<a href="cadFunc.php" class="btn btn-success btn-sm offset-3" role="button">Novo Funcionário</a>
+					<button class="btn btn-success btn-sm offset-3" role="button" data-toggle="modal" data-target="#modalInserir">Novo Funcionário</button>
 					<p>
 				</div>
-        <div class="col-md-12">
+        <div class="col-md-,12">
 				<div class="table-responsive">
-            <table id="mytable" class="table table-bordred table-striped">      
+            <table id="mytable" data-role="table" class="table table-bordred table-striped">      
               <thead>
 								<th>ID</th>
                 <th>Nome</th>
@@ -101,7 +101,7 @@ include 'MenuPrincipal.php';
 					<!-- Footer do modal -->
 					<div class="modal-footer">
 						<button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-						<button id="confirmaAlteracao" name="confirmaAlteracao" type="button" class="btn btn-success">Confirmar</button></td>
+						<button id="confirmaAlteracao" name="confirmaAlteracao" type="button" class="btn btn-warning">Confirmar</button></td>
 					</div>  
 				</div>
 			</div>
@@ -136,7 +136,7 @@ include 'MenuPrincipal.php';
 								<!-- Footer do modal -->
 								<div class="modal-footer">
 									<button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-									<button name="confirmaExclusao" id="confirmaExclusao" type="button" class="btn btn-success">Confirmar</button></td>
+									<button name="confirmaExclusao" id="confirmaExclusao" type="button" class="btn btn-danger">Confirmar</button></td>
 								</div> 
               </form>
             </div>
@@ -180,9 +180,47 @@ include 'MenuPrincipal.php';
     	</div>
   	</div>
 
-    <!-- Bootstrap core JavaScript -->
-    <script src="../assets/js/popper.js"></script>
-	<script src="../assets/js/ListFunc.js"></script>
+		<!-- Modal INSERIR -->
+		<div class="modal fade" id="modalInserir" role="dialog">
+        <div class="modal-dialog modal-lg">
+          <div class="modal-content">
+            <!-- Cabecalho do modal -->
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+              <h4 class="modal-title">Inserir Funcionário</h4>
+            </div>
+            <!-- Corpo do modal -->
+            <div class="modal-body">
+              <!-- Formulario que vai cuidar de excluir os dados no back-end -->
+              <form id="formInserir" method="POST">
+                <div class="form-group">
+                  <label for="nomeInserir">Nome</label>
+                  <input type="text" class="form-control" name="nomeInserir" id="nomeInserir">
+                </div>
+                <div class="form-group">
+                  <label for="usuarioInserir">Usuario</label>
+                  <input type="text" class="form-control" name="usuarioInserir" id="usuarioInserir">
+                </div>
+								<div class="form-group">
+                  <label for="senhaInserir">Senha</label>
+                  <input type="password" class="form-control" name="senhaInserir" id="senhaInserir">
+                </div>
+              </form>
+            </div>
+	          <!-- Footer do modal -->
+	    			<div class="modal-footer">
+	      			<button type="button" class="btn btn-default" data-dismiss="modal">Sair</button>
+							<button name="salvarInsercao" id="salvarInsercao" type="button" class="btn btn-success">Salvar</button></td>
+	      		</div>  
+      		</div>
+    	</div>
+  	</div>							
+
+
+
+
+  <!-- Bootstrap core JavaScript -->
+  <script src="../assets/js/popper.js"></script>
 	<script src="../assets/js/ListFunc.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.0/jquery-confirm.min.js"></script>
 	
