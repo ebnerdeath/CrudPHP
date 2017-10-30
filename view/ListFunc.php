@@ -25,12 +25,12 @@ include 'MenuPrincipal.php';
 <div class="container">
 	<h4>Lista de Funcionários</h4>
 	<p>
-	<div data-role="content">
-				<div class="row">
-					<button class="btn btn-success btn-sm offset-3" role="button" data-toggle="modal" data-target="#modalInserir">Novo Funcionário</button>
+	<div>
+				<div class="row col-md-12">
+					<button class="btn btn-success btn-sm offset-12" role="button" data-toggle="modal" data-target="#modalInserir">Novo</button>
 					<p>
 				</div>
-        <div class="col-md-,12">
+        <div class="col-md-12">
 				<div class="table-responsive">
             <table id="mytable" data-role="table" class="table table-bordred table-striped">      
               <thead>
