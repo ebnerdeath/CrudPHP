@@ -37,6 +37,11 @@ require '../model/Funcionario.php';
             $funcionario = new Funcionario($id);
             
             $funcionariodao->delete($id);
+        }else
+        if ($servico == "READ") {
+            $funcionariodao = new FuncionarioDao();
+            
+            return $funcionariodao->read();
         }
     }  
 ?>

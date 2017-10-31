@@ -43,7 +43,21 @@ class FuncionarioDao implements Icrud{
                             $objeto = new Funcionario( $id, $nome, $usuario, $senha );
                             $lista[] = $objeto;
                     }
-                    return $lista;
+                    //return $lista;
+                    $myArr = [];
+                    foreach($lista as $row){
+                        $arr = array(
+                            'id' => $row->getId(),
+                            'nome' => $row->getNome(),
+                            'usuario' => $row->getUsuario(),
+                            'senha' => $row->getSenha(),
+                        );
+                        $myArr[] = $arr;
+                    }
+
+                    header('Access-Control-Allow-Origin: *');
+                    header('Content-Type: application/json');
+                    echo json_encode($myArr);
                 }    
             }
         } catch( PDOException $excecao ){

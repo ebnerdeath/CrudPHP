@@ -18,19 +18,20 @@ include 'MenuPrincipal.php';
     <!-- Custom styles for this template -->
     <!--  <link href="assets/css/simple-sidebar.css" rel="stylesheet">
     <link href="assets/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet">
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.0/jquery-confirm.min.css">  -->
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.0/jquery-confirm.min.css">  -->
 
 </head>
 
 <div class="container">
-	<h4>Lista de Funcionários</h4>
-	<p>
+	<div class="row col-md-12 offset-11">
+		<button class="btn btn-success btn-md offset-12" role="button" data-toggle="modal" data-target="#modalInserir">Novo</button>
+		<p>
+	</div>
+	<div class="row offset-5">
+		<h4>Lista de Funcionários</h4>
+	</div>
 	<div>
-				<div class="row col-md-12">
-					<button class="btn btn-success btn-sm offset-12" role="button" data-toggle="modal" data-target="#modalInserir">Novo</button>
-					<p>
-				</div>
-        <div class="col-md-12">
+        <div class="container">
 				<div class="table-responsive">
             <table id="mytable" data-role="table" class="table table-bordred table-striped">      
               <thead>
@@ -41,9 +42,9 @@ include 'MenuPrincipal.php';
 								<th>Editar</th>
                 <th>Excluir</th>
               </thead>
-							<tbody>
-							<?php
-							$funcionariodao = new FuncionarioDao();
+							<tbody id="linhasTabela">
+							<!--
+							/*$funcionariodao = new FuncionarioDao();
 							// Inicia sessões
 							if($funcionariodao->read()!=null){
 								$arr = $funcionariodao->read();
@@ -62,8 +63,8 @@ include 'MenuPrincipal.php';
 										echo'<td><p data-placement="top" data-toggle="tooltip" title="Excluir"><button id="btnExcluir" class="btn btn-danger btn-xs" data-title="Deletar" data-toggle="modal" data-target="#modalDeletar" ><span class="fa fa-trash"></span></button></p></td>';
 									echo'</tr>';
 								}
-							}	
-							?>	
+							}	*/
+						-->
 							</tbody>  
 					</table>
         </div>
@@ -214,7 +215,7 @@ include 'MenuPrincipal.php';
 	      		</div>  
       		</div>
     	</div>
-  	</div>							
+		</div>
 
 
 
