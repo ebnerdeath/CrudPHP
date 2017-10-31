@@ -1,8 +1,8 @@
 <?php
-require '../util/ValidaSessao.php';
+require '../util/ValidaSessao.php';//ANTES VALIDAMOS A SESSÃO
 require '../dao/FuncionarioDao.php';
 require '../model/Funcionario.php';
-include 'MenuPrincipal.php';
+include 'MenuPrincipal.php'; //AQUI IMPORTAMOS TUDO OS IMPORTS QUE TEM JA NO MENU PRINCIPAL
 ?>
 
 <html lang="en">
@@ -13,58 +13,32 @@ include 'MenuPrincipal.php';
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>JEBLanches - Lista de Funcionarios</title>
+    <title>Lista de Usuários</title>
 		<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
-    <!-- Custom styles for this template -->
-    <!--  <link href="assets/css/simple-sidebar.css" rel="stylesheet">
-    <link href="assets/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet">
-		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.0/jquery-confirm.min.css">  -->
-
 </head>
 
 <div class="container">
-	<div class="row col-md-12 offset-11">
+	<div class="row col-md-12">
 		<button class="btn btn-success btn-md offset-12" role="button" data-toggle="modal" data-target="#modalInserir">Novo</button>
 		<p>
 	</div>
 	<div class="row offset-5">
-		<h4>Lista de Funcionários</h4>
+		<h4>Lista de Usuários</h4>
 	</div>
 	<div>
         <div class="container">
 				<div class="table-responsive">
-            <table id="mytable" data-role="table" class="table table-bordred table-striped">      
+            <table id="mytable" data-role="table" class="table table-bordred">      
               <thead>
 								<th>ID</th>
                 <th>Nome</th>
                 <th>Usuario</th>
-								<th>Visualizar</th>
+								<th>Ver</th>
 								<th>Editar</th>
                 <th>Excluir</th>
               </thead>
 							<tbody id="linhasTabela">
-							<!--
-							/*$funcionariodao = new FuncionarioDao();
-							// Inicia sessões
-							if($funcionariodao->read()!=null){
-								$arr = $funcionariodao->read();
-								foreach($arr as $key => $funcionario){
-									$arrObj[] = $funcionario;
-										echo'<tr>';
-										echo'<td data-id="'.$funcionario->getId().'">'.$funcionario->getId().'</td>';
-										echo'<td data-nome="'.$funcionario->getNome().'">'.$funcionario->getNome().'</td>';
-										echo'<td data-usuario="'.$funcionario->getUsuario().'">'.$funcionario->getUsuario().'</td>';
-										//echo'<td data-senha="'.$funcionario->getSenha().'">'.$funcionario->getSenha().'</td>';
-										
-										echo'<td><p data-placement="top" data-toggle="tooltip" title="Visualizar"><button id="btnVisualizar" class="btn btn-success btn-xs" data-title="Visualizar" data-toggle="modal" data-target="#modalVisualizar"><span class="fa fa-eye"></span></button></p></td>';
-										
-										echo'<td><p data-placement="top" data-toggle="tooltip" title="Editar"><button id="btnAlterar" class="btn btn-primary btn-xs" data-title="Editar" data-toggle="modal" data-target="#modalAlterar"> <span class="fa fa-pencil"></span></button></p></td>';
-										
-										echo'<td><p data-placement="top" data-toggle="tooltip" title="Excluir"><button id="btnExcluir" class="btn btn-danger btn-xs" data-title="Deletar" data-toggle="modal" data-target="#modalDeletar" ><span class="fa fa-trash"></span></button></p></td>';
-									echo'</tr>';
-								}
-							}	*/
-						-->
+								<!-- AQUI UM JAVASCRIPT NO DIRETORIO assets/js/listFunc.js INSERE OS DADOS NA TABELA DE ACORDO COM A ID DO TBODY -->
 							</tbody>  
 					</table>
         </div>
@@ -75,11 +49,11 @@ include 'MenuPrincipal.php';
 					<!-- Cabecalho do modal -->
 					<div class="modal-header">
 						<button type="button" class="close" data-dismiss="modal">&times;</button>
-						<h4 class="modal-title">Alterar Funcionário</h4>
+						<h4 class="modal-title">Alterar Usuário</h4>
 					</div>
 					<!-- Corpo do modal -->
 					<div class="modal-body">
-						<!-- Formulario que vai cuidar de excluir os dados no back-end -->
+						<!-- Formulario que vai cuidar de alterar os dados no back-end -->
 						<form id="formAlterar">
 							<div class="form-group">
 								<label for="codigoAlterar">Código</label>
@@ -116,7 +90,7 @@ include 'MenuPrincipal.php';
             <!-- Cabecalho do modal -->
             <div class="modal-header">
               <button type="button" class="close" data-dismiss="modal">&times;</button>
-              <h4 class="modal-title">Excluir Funcionário</h4>
+              <h4 class="modal-title">Excluir Usuário</h4>
             </div>
             <!-- Corpo do modal -->
             <div class="modal-body">
@@ -153,11 +127,10 @@ include 'MenuPrincipal.php';
             <!-- Cabecalho do modal -->
             <div class="modal-header">
               <button type="button" class="close" data-dismiss="modal">&times;</button>
-              <h4 class="modal-title">Visualizar Funcionário</h4>
+              <h4 class="modal-title">Visualizar Usuário</h4>
             </div>
             <!-- Corpo do modal -->
             <div class="modal-body">
-              <!-- Formulario que vai cuidar de excluir os dados no back-end -->
               <form method="POST">
                 <div class="form-group">
                   <label for="codigoVisualizar">Código</label>
@@ -188,11 +161,11 @@ include 'MenuPrincipal.php';
             <!-- Cabecalho do modal -->
             <div class="modal-header">
               <button type="button" class="close" data-dismiss="modal">&times;</button>
-              <h4 class="modal-title">Inserir Funcionário</h4>
+              <h4 class="modal-title">Inserir Usuário</h4>
             </div>
             <!-- Corpo do modal -->
             <div class="modal-body">
-              <!-- Formulario que vai cuidar de excluir os dados no back-end -->
+              <!-- Formulario que vai cuidar de inserir os dados no back-end -->
               <form id="formInserir" method="POST">
                 <div class="form-group">
                   <label for="nomeInserir">Nome</label>
@@ -216,10 +189,6 @@ include 'MenuPrincipal.php';
       		</div>
     	</div>
 		</div>
-
-
-
-
   <!-- Bootstrap core JavaScript -->
   <script src="../assets/js/popper.js"></script>
 	<script src="../assets/js/ListFunc.js"></script>

@@ -42,6 +42,12 @@ require '../model/Funcionario.php';
             $funcionariodao = new FuncionarioDao();
             
             return $funcionariodao->read();
+        }else
+        if ($servico == "READ_ID") {
+            $id = $_GET['id'];
+            $funcionariodao = new FuncionarioDao();
+            
+            return $funcionariodao->readId($id);
         }
     }  
 ?>

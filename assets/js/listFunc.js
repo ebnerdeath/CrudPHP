@@ -1,44 +1,20 @@
-var sidebar = false;
-
-	// Menu Toggle Script
-	function menuToggle(){ 
-      $("#wrapper").toggleClass("toggled");
-      sidebar == false ?  rigthDiv() : leftDiv();
-    }
-    
-	function rigthDiv(){
-		sidebar = true;
-		  $("#table-form").removeClass("offset-lg-1 offset-md-1 offset-sm-1 offset-1 col-md-10 col-lg-10 col-sm-10");
-		  $("#table-form" ).addClass("offset-lg-2 offset-md-4 col-lg-10 col-md-7");
-	}
-
-	function leftDiv(){
-		sidebar = false;
-		$("#table-form").removeClass("offset-lg-2 offset-md-4 col-lg-10 col-md-7");
-		$("#table-form" ).addClass("offset-lg-1 offset-md-1 offset-sm-1 offset-1 col-md-10 col-lg-10 col-sm-10");
-	}
-	
-	function meuAlert(titulo,conteudo,link){
-		$.alert({     title: titulo,     content: conteudo, });
-		window.location.href = link;
-	}
-	
-	//Recupera o valor da linha com jquery para o modal alterar
+// RECUPERA O VALOR DA LINHA COM JQUERY PARA O MODAL ALTERAR
 $(function(){
 	$(document).on('click', '#btnAlterar', function(e) {
 		e.preventDefault;
 			var codigo = $(this).closest('tr').find('td[data-id]').data('id');
 	        var nome = $(this).closest('tr').find('td[data-nome]').data('nome');
 	        var usuario = $(this).closest('tr').find('td[data-usuario]').data('usuario');
-	        //var senha = $(this).closest('tr').find('td[data-senha]').data('senha');
+			var senha = $(this).closest('tr').find('td[data-senha]').data('senha');
 
 	        $('#codigoAlterar').val(codigo);
 	        $('#nomeAlterar').val(nome);
-	        $('#usuarioAlterar').val(usuario);
+			$('#usuarioAlterar').val(usuario);
+			$('#senhaAlterar').val(senha);
 		});
 });
 
-// Recupera o valor da linha com jquery para o modal delete
+// RECUPERA O VALOR DA LINHA COM JQUERY PARA O MODAL DELETAR
 $(function(){
 	$(document).on('click', '#btnExcluir', function(e) {
 		e.preventDefault;
@@ -52,7 +28,7 @@ $(function(){
 		});
 });
 
-// Recupera o valor da linha com jquery para o modal delete
+// RECUPERA O VALOR DA LINHA COM JQUERY PARA O MODAL VISUALIZAR
 $(function(){
 	$(document).on('click', '#btnVisualizar', function(e) {
 		e.preventDefault;
@@ -66,30 +42,43 @@ $(function(){
 		});
 });
 
-
+//FUNÇÃO QUE DELETA OS DADOS NO BANCO DE DADOS... UTILIZANDO O SERIALIZE
 $(document).ready(function(){
 	$("#confirmaExclusao").click(function(){
-		var a=$('#formExcluir').serialize();
-		$.ajax({
-			type:'POST',
-			url:'../service/ServicoFuncionario.php?servico=DELETE',
-			data:a,
-			beforeSend:function() {
-        //
-			},
-			complete:function() {
-        //	
-			},
-			success:function(result) {
-				alertify.error('Dados excluídos com sucesso!');
-				$('#formDeletarinput').val("");
-				$('#modalDeletar').modal('hide'); 
-				consomeRead();
-			}
+		alertify.defaults.glossary.title = 'Atenção';
+		alertify.confirm("Tem certeza que deseja Excluir?",
+		
+		function(){
+		  //alertify.success('Sim');
+		  var a=$('#formExcluir').serialize();
+		  $.ajax({
+			  type:'POST',
+			  url:'../service/ServicoFuncionario.php?servico=DELETE',
+			  data:a,
+			  beforeSend:function() {
+		  //
+			  },
+			  complete:function() {
+		  //	
+			  },
+			  success:function(result) {
+				  alertify.error('Dados excluídos com sucesso!');
+				  $('#formDeletarinput').val("");
+				  $('#modalDeletar').modal('hide'); 
+				  consomeRead();
+			  }
+		  });
+		},
+		function(){
+			$('#formDeletarinput').val("");
+			$('#modalDeletar').modal('hide'); 
 		});
+		
+		
 	});
 });
 
+//FUNÇÃO QUE ALTERA OS DADOS NO BANCO DE DADOS... UTILIZANDO O SERIALIZE
 $(document).ready(function(){
 	$("#confirmaAlteracao").click(function(){
 		if($("#nomeAlterar").val()==""){ 
@@ -123,6 +112,7 @@ $(document).ready(function(){
 	});
 });
 
+//FUNÇÃO QUE INSERE OS DADOS NO BANCO DE DADOS... UTILIZANDO O SERIALIZE
 $(document).ready(function(){
 	$("#salvarInsercao").click(function(){
 		if($("#nomeInserir").val()==""){ 
@@ -161,8 +151,9 @@ $(document).ready(function(){
 	consomeRead();
  });
 
- function consomeRead(){
-let url = '../service/ServicoFuncionario.php?servico=READ' 
+ //FUNÇÃO QUE CONSOME O METODO READ DA DAO
+function consomeRead(){
+	let url = '../service/ServicoFuncionario.php?servico=READ' 
 	$.get(url, function(data){
 		let template =``;
 
@@ -171,12 +162,13 @@ let url = '../service/ServicoFuncionario.php?servico=READ'
 			template += `<td data-id="${data[x]['id']}"> ${data[x]['id']}</td>`;
 			template += `<td data-nome="${data[x]['nome']}"> ${data[x]['nome']}</td>`;
 			template += `<td data-usuario="${data[x]['usuario']}"> ${data[x]['usuario']}</td>`;
+			template += `<td hidden data-senha="${data[x]['senha']}"> ${data[x]['senha']}</td>`;
 			template += `<td><p data-placement="top" data-toggle="tooltip" title="Visualizar"><button id="btnVisualizar" class="btn btn-success btn-xs" data-title="Visualizar" data-toggle="modal" data-target="#modalVisualizar"><span class="fa fa-eye"></span></button></p></td>`;
 			template += `<td><p data-placement="top" data-toggle="tooltip" title="Editar"><button id="btnAlterar" class="btn btn-primary btn-xs" data-title="Editar" data-toggle="modal" data-target="#modalAlterar"> <span class="fa fa-pencil"></span></button></p></td>`;
 			template += `<td><p data-placement="top" data-toggle="tooltip" title="Excluir"><button id="btnExcluir" class="btn btn-danger btn-xs" data-title="Deletar" data-toggle="modal" data-target="#modalDeletar" ><span class="fa fa-trash"></span></button></p></td>`;
 			template += `</tr>`;
 		} 
 		document.getElementById("linhasTabela").innerHTML = template;
-		console.table(data);
+		//console.table(data);
 	});
 }

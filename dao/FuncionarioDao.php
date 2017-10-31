@@ -3,7 +3,7 @@
 require_once '../dao/Icrud.php';
 require '../util/Connection.php';
 
-class FuncionarioDao implements Icrud{
+class FuncionarioDao{
     private $instanciaConexaoAtiva;
     private $tabela;
 
@@ -65,21 +65,36 @@ class FuncionarioDao implements Icrud{
         }
      }
 
-     public function readFromId( $id ) {
+     public function readId( $id ) {
         try {
            $conn = conecta(); 
            $operacao = $conn->prepare("SELECT * from {$this->tabela} WHERE ID= :id");
            $operacao->bindParam(':id',$id);
-           $operacao->execute();
-           $getRow = $operacao->fetch(PDO::FETCH_OBJ);
-           $idBanco = $getRow->id;
-           $nome = $getRow->nome;
-           $usuario = $getRow->usuario;
-           $senha = $getRow->senha;
-           $objeto = new Funcionario($idBanco, $nome, $usuario, $senha );
-           $objeto->setId($id);
-           echo $objeto->getNome();
-           return $objeto;
+           if($operacao->execute()){
+               if($operacao->rowCount()>0){
+                    $getRow = $operacao->fetch(PDO::FETCH_OBJ);
+                    $id = $getRow->id;
+                    $nome = $getRow->nome;
+                    $usuario = $getRow->usuario;
+                    $senha = $getRow->senha;
+                    $objeto = new Funcionario( $id, $nome, $usuario, $senha );
+                    $lista[] = $objeto;
+
+                    $myArr = [];
+                    foreach($lista as $row){
+                        $arr = array(
+                            'id' => $row->getId(),
+                            'nome' => $row->getNome(),
+                            'usuario' => $row->getUsuario(),
+                            'senha' => $row->getSenha(),
+                        );
+                        $myArr[] = $arr;
+                    }
+                    header('Access-Control-Allow-Origin: *');
+                    header('Content-Type: application/json');
+                    echo json_encode($myArr);
+                }
+           }
         } catch( PDOException $excecao ){
            echo $excecao->getMessage();
         }

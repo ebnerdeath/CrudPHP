@@ -26,7 +26,7 @@ require '../util/DestroiSessao.php';
 <body>
 
   <div class="container">
-    <h1>Seja bem-vindo ao JEBLanches</h1>
+    <h1>Cadastro de Usuários em PHP</h1>
     <div class="col-md-4 col-md-offset-2 col-md-offset-">
        <?php
           $funcionario = new Funcionario(0,"0","0","0");
@@ -57,7 +57,7 @@ require '../util/DestroiSessao.php';
             <input type="checkbox" value="remember-me"> Lembrar-me
           </label>
         </div>
-        <button name="acessar" class="btn btn-lg btn-danger btn-block" type="submit">Acessar</button>
+        <button name="acessar" class="btn btn-lg btn-default btn-block" type="submit">Acessar</button>
       </form>
     </div>
   </div>
